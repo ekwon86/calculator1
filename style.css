@@ -11,26 +11,42 @@
     height: 50vh;
     margin-top: 15vh;
 }
-body {
-    background-image:
+.main-container > *{
+    height: 100%;
 }
-.output {
-    display: inline;
-    height: 13.6vh;
+.top{
+    height: 20%;
 }
-.bottom {
-    margin-top: 1vh;
+.bottom{
+    height: 80%;
+}
+.row_fullheight{
+    height: 100%;
+}
+.col_fullheight{
+    height: 100%;
+}
+.display {
+    height: 100%;
+    background-color: grey;
+    border-radius: 1%;
+}
+.side div {
+    height: 5vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .keys {
     text-align: center;
     padding: 2vh 0 2vh 0;
     box-sizing: border-box;
-    background-color: grey;
+    background-color: dimgrey;
     color: white;
-    display: inline block;
+    border-radius: 5%;
 }
 .keys:hover {
-    background-color: cyan;
+    background-color: mediumturquoise;
 }
 .operators {
     background-color: orange;
@@ -42,5 +58,5 @@ body {
     background-color: darkorange;
 }
 .equals {
-    background-color: red;
+    background-color: firebrick;
 }
