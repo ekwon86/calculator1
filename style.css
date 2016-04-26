@@ -1,0 +1,40 @@
+* {
+    padding: 0;
+    margin: 0;
+    font-family: "Arial Narrow";
+    font-size: 110%;
+    text-align: center;
+    box-sizing: border-box;
+    border: white 1px solid;
+}
+.main-container {
+    height: 250px;
+    margin-top: 15vh;
+}
+.output {
+    display: inline;
+    height: 13.6vh;
+}
+.bottom {
+    margin-top: 1vh;
+}
+.keys {
+    text-align: center;
+    padding: 2vh 0 2vh 0;
+    box-sizing: border-box;
+    background-color: black;
+    color: white;
+    display: inline block;
+}
+.operators {
+    background-color: orange;
+}
+.all-clear {
+    background-color: darkorange;
+}
+.clear {
+    background-color: tomato;
+}
+.equals {
+    background-color: red;
+}
