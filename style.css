@@ -8,8 +8,11 @@
     border: white 1px solid;
 }
 .main-container {
-    height: 250px;
+    height: 50vh;
     margin-top: 15vh;
+}
+body {
+    background-image:
 }
 .output {
     display: inline;
@@ -22,18 +25,21 @@
     text-align: center;
     padding: 2vh 0 2vh 0;
     box-sizing: border-box;
-    background-color: black;
+    background-color: grey;
     color: white;
     display: inline block;
+}
+.keys:hover {
+    background-color: cyan;
 }
 .operators {
     background-color: orange;
 }
 .all-clear {
-    background-color: darkorange;
+    background-color: tomato;
 }
 .clear {
-    background-color: tomato;
+    background-color: darkorange;
 }
 .equals {
     background-color: red;
