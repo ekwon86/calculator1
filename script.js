@@ -21,43 +21,53 @@ var operator = ' ';
 var index = 0;
 
 $(document).ready(function() {
-
-   
+    //click handler for buttons
     $('button').on('click', function() {
-       var val = $(this).text();
-       console.log("btn clicked : ", val);
-       switch (val) {
-           case '+':
+        var val = $(this).text();
+        console.log("btn click: ", val);
 
-               
-               break;
-           case '-':
+        if ($(this).hasClass('numbers')) {
+            num_array[index] += val;
+            $('.display').html(val);
+            console.log(num_array);
+        }
+        else if ($(this).hasClass('operators')) {
+            console.log('test');
+            operator = val;
+            index++;
+            $('.display').html(val);
+            // $('.display').empty();
 
-              
-               break;
-           case '÷':
-
-              
-               break;
-           case 'x':
-
-               
-               break;
-           case 'AC':
-
-               break;
-           case 'C':
-
-               break;
-           default:
-               break;
-       }
-   })
+        } else if ($(this).hasClass('equals')) {
+            var answer = 0;
+                switch (val) {
+                    case '+':
+                        answer = num_array[0] + num_array[1];
+                        break;
+                    case '-':
+                        answer = num_array[0] - num_array[1];
+                        break;
+                    case '÷':
+                        answer = num_array[0] / num_array[1];
+                        break;
+                    case 'x':
+                        answer = num_array[0] * num_array[1];
+                        break;
+                    case 'AC':
+                        break;
+                    case 'C':
+                        break;
+                    default:
+                        break;
+                } $('.display')
+        }
+    })
 });
+
 
 // if number is pressed add to current position
 
-
+// if $(this).hasClass('operator')
 
 
 /*-------------------- V1.0 --------------------*/
