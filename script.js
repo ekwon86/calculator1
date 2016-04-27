@@ -23,6 +23,9 @@ $(document).ready(function() {
            case 'AC':
                my_calculator.allClear();
                break;
+           case 'C':
+               my_calculator.clear();
+               break;
            default: 
                my_calculator.addItem($(this).text());
                break;
