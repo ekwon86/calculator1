@@ -1,6 +1,5 @@
 // Created by gkwon on 4/25/16.
 
-
 //callback function
 function callback(type, value, item) {
     switch (value) {
