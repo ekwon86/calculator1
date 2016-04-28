@@ -1,19 +1,5 @@
 // Created by gkwon on 4/25/16.
 
-//callback function
-// function callback(type, value, item) {
-//     switch (value) {
-//         case undefined:
-//             $('.display').html(" ");
-//             break;
-//         default:
-//             $('.display').html(value);
-//             break;
-//     }
-// }
-//my_calculator - creates a new calculator object
-// var my_calculator = new calculator(callback);
-//after DOM load add click handlers to all buttons
 
 //global variables
 var num_array = [' ', ' '];
@@ -21,6 +7,14 @@ var operator = ' ';
 var index = 0;
 
 $(document).ready(function() {
+    //clear function
+    function clear() {
+        $('.display').html("0");
+    }
+    //set initial display to '0'
+    // i can click zero numerous times. figure out a way to prevent 0 from logging more than once if value is 0.
+    clear();
+
     //click handler for buttons
     $('button').on('click', function() {
         var val = $(this).text();
@@ -29,19 +23,25 @@ $(document).ready(function() {
         if ($(this).hasClass('numbers')) {
             num_array[index] += val;
             $('.display').html(val);
+            // $('.display').html(num_array.join(''));
             console.log(num_array);
-        }
+        } // calculator won't spit out more numbers after first number but shows up
+          // figured out to show multiple numbers but after operator index[0] number pops up
+
         else if ($(this).hasClass('operators')) {
-            console.log('test');
             operator = val;
             index++;
             $('.display').html(val);
-            // $('.display').empty();
 
+        } else if ($(this).hasClass('all-clear')) { 
+            clear();
+        } else if ($(this).hasClass('clear')) {
+            clear();
         } else if ($(this).hasClass('equals')) {
             var answer = 0;
-                switch (val) {
+                switch (operator) {
                     case '+':
+                        //example if i add 1 + 1 returns 1 1 not 2 because of concatentation
                         answer = num_array[0] + num_array[1];
                         break;
                     case '-':
@@ -56,10 +56,11 @@ $(document).ready(function() {
                     case 'AC':
                         break;
                     case 'C':
+                        clear();
                         break;
                     default:
                         break;
-                } $('.display')
+                } $('.display').html(answer);
         }
     })
 });
@@ -78,3 +79,17 @@ $(document).ready(function() {
 //process calculation based on objects in array
 
 
+//callback function
+// function callback(type, value, item) {
+//     switch (value) {
+//         case undefined:
+//             $('.display').html(" ");
+//             break;
+//         default:
+//             $('.display').html(value);
+//             break;
+//     }
+// }
+//my_calculator - creates a new calculator object
+// var my_calculator = new calculator(callback);
+//after DOM load add click handlers to all buttons
