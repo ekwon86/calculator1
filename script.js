@@ -8,22 +8,23 @@ var index = 0;
 
 $(document).ready(function() {
     //set initial display to '0'
-    $('.display').html("0")
-
+    $('.display').html("0");
 
     // i can click zero numerous times. figure out a way to prevent 0 from logging more than once if value is 0.
 
     //click handler for buttons
+
     $('button').on('click', function() {
         var val = $(this).text();
         console.log("btn click: ", val);
-        //numbers
+
+        //numbers TODO:  this should go into a click handler for button with a class of number
         if ($(this).hasClass('numbers')) {
             num_array[index] += val;
             $('.display').html(num_array[index]);
             console.log(num_array);
         }
-        //decimal
+        //decimal TODO: ths should go into a click handler for a button with a class of decimal
         else if ($(this).hasClass('decimal')) {
             num_array[index] += val;
             $('.display').html(num_array[index]);
@@ -34,7 +35,19 @@ $(document).ready(function() {
             index++;
             $('.display').html(val);
         }
-
+        //all clear
+        else if ($(this).hasClass('all-clear')) {
+            num_array = [' ', ' '];
+            operator = ' ';
+            index = 0;
+            $('.display').html(" ");
+            console.log(num_array, operator);
+        }
+        //clear content in current array
+        else if ($(this).hasClass('clear')) {
+            $(num_array[index]).val(" ");
+            $('.display').html(" ");
+        }
         //equals
         else if ($(this).hasClass('equals')) {
             var answer = 0;
@@ -48,7 +61,12 @@ $(document).ready(function() {
                         break;
                     case '÷':
                         //display set to error if you divide by 0.
-                        answer = parseFloat(num_array[0]) / parseFloat(num_array[1]);
+                        if (num_array[1] == 0) {
+                            $('.display').html('error');
+                        }
+                        else {
+                            answer = parseFloat(num_array[0]) / parseFloat(num_array[1]);
+                        }
                         break;
                     case 'x':
                         answer = parseFloat(num_array[0]) * parseFloat(num_array[1]);
@@ -56,28 +74,20 @@ $(document).ready(function() {
                     case '=':
                         // what happens when you press equals again?
                         // figure out how to recall operator used from previous
-                        //     switch () {
-                        //
-                        //     }
+                            if (operator == '+') {
+                                answer = answer + parseFloat(num_array[0]) + parseFloat(num_array[1]);
+                            }
                         break;
                     default:
-                        // $('.display').html('error');
+
                         break;
                 }
             $('.display').html(answer);
+            console.log('the answer is: ' + answer);
         }
-        //all clear 
-        else if ($(this).hasClass('all-clear')) {
-            function allClear(num_array,operator) {
-                num_array = [' ', ' '];
-                operator = ' ';
-                $('.display').html("0");
-            } allClear();
-        }
-        //clear content in current array
-        else if ($(this).hasClass('clear')) {
 
-        }
+
+
     })
 });
 
