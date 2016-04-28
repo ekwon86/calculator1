@@ -7,68 +7,68 @@ var operator = ' ';
 var index = 0;
 
 $(document).ready(function() {
-    //clear function
-    function clear() {
-        $('.display').html("0");
-    }
     //set initial display to '0'
+    $('.display').html("0")
     // i can click zero numerous times. figure out a way to prevent 0 from logging more than once if value is 0.
-    clear();
 
     //click handler for buttons
     $('button').on('click', function() {
         var val = $(this).text();
         console.log("btn click: ", val);
-
+        //numbers
         if ($(this).hasClass('numbers')) {
             num_array[index] += val;
-            $('.display').html(val);
-            // $('.display').html(num_array.join(''));
+            $('.display').html(num_array[index]);
             console.log(num_array);
-        } // calculator won't spit out more numbers after first number but shows up
-          // figured out to show multiple numbers but after operator index[0] number pops up
-
+        }
+        //decimal
+        else if ($(this).hasClass('decimal')) {
+            num_array[index] += val;
+            $('.display').html(num_array[index]);
+        }
+        //operators
         else if ($(this).hasClass('operators')) {
             operator = val;
             index++;
             $('.display').html(val);
+        }
 
-        } else if ($(this).hasClass('all-clear')) { 
-            clear();
-        } else if ($(this).hasClass('clear')) {
-            clear();
-        } else if ($(this).hasClass('equals')) {
+
+
+        else if ($(this).hasClass('equals')) {
             var answer = 0;
                 switch (operator) {
                     case '+':
-                        //example if i add 1 + 1 returns 1 1 not 2 because of concatentation
-                        answer = num_array[0] + num_array[1];
+                        //use parseFloat to parse numbers in case of decimals.
+                        answer = parseFloat(num_array[0]) + parseFloat(num_array[1]);
                         break;
                     case '-':
-                        answer = num_array[0] - num_array[1];
+                        answer = parseFloat(num_array[0]) - parseFloat(num_array[1]);
                         break;
                     case '÷':
-                        answer = num_array[0] / num_array[1];
+                        answer = parseFloat(num_array[0]) / parseFloat(num_array[1]);
                         break;
                     case 'x':
-                        answer = num_array[0] * num_array[1];
+                        answer = parseFloat(num_array[0]) * parseFloat(num_array[1]);
                         break;
-                    case 'AC':
-                        break;
-                    case 'C':
-                        clear();
+                    case '=':
                         break;
                     default:
                         break;
                 } $('.display').html(answer);
         }
+        //all clear 
+        else if ($(this).hasClass('all-clear')) {
+
+        }
+        /clear
+        else if ($(this).hasClass('clear')) {
+
+        }
     })
 });
 
 
-// if number is pressed add to current position
-
-// if $(this).hasClass('operator')
 
 
 /*-------------------- V1.0 --------------------*/
