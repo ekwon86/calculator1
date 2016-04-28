@@ -12,89 +12,88 @@ $(document).ready(function() {
         process_number_click(this);
     });
 
-    function process_number_click(the_button){
-        var val = $(the_button).text();
-        num_array[index] += val;
-        $('.display').html(num_array[index]);
-        console.log(num_array);
-    }
-
     // click handler for decimal
     $('button.decimal').click(function() {
         process_decimal_click(this);
     });
-
-    function process_decimal_click(the_button){
-        var val = $(the_button).text();
-        num_array[index] += val;
-        $('.display').html(num_array[index]);
-    }
 
     //click handler for operators
     $('button.operators').click(function() {
         process_operator_click(this);
     });
 
-    function process_operator_click(the_button){
-        var val = $(the_button).text();
-        operator = val;
-        index++;
-        $('.display').html(val);
-    }
+    //click handler for equals
+    $('button.equals').click(function() {
+        process_equals_click(this);
+    });
 
     //click handler for all-clear
     $('button.all-clear').click(function() {
         process_allclear_click(this);
     });
-    function process_allclear_click(the_button){
-        var val = $(the_button).text();
-        num_array = [' ', ' '];
-        operator = ' ';
-        index = 0;
-        $('.display').html(" ");
-        console.log(num_array, operator);
-    }
 
     //click handler for clear
     $('button.clear').click(function() {
         process_clear_click(this);
     });
-    function process_clear_click(the_button){
-        var val = $(the_button).text();
-        $(num_array[index]).val(" ");
-        $('.display').html(" ");
-    }
 
-    //click handler for equals
-    $('button.equals').click(function() {
-        process_equals_click(this);
-    });
-    function process_equals_click(the_button){
-        var val = $(the_button).text();
-        var answer = 0;
-        switch (operator) {
-            case '+':
-                //use parseFloat to parse numbers in case of decimals.
-                answer = parseFloat(num_array[0]) + parseFloat(num_array[1]);
-                break;
-            case '-':
-                answer = parseFloat(num_array[0]) - parseFloat(num_array[1]);
-                break;
-            case '÷':
-                answer = parseFloat(num_array[0]) / parseFloat(num_array[1]);
-                break;
-            case 'x':
-                answer = parseFloat(num_array[0]) * parseFloat(num_array[1]);
-                break;
-            default:
-                break;
-        }
-        $('.display').html(answer);
-        console.log('the answer is: ' + answer);
-    }
+
 });
 
-
+/*-------------------------- CALCULATOR FUNCTIONS --------------------------*/
+function process_number_click(the_button){
+    var val = $(the_button).text();
+    num_array[index] += val;
+    $('.display').html(num_array[index]);
+    console.log(num_array);
+}
+function process_decimal_click(the_button){
+    var val = $(the_button).text();
+    num_array[index] += val;
+    $('.display').html(num_array[index]);
+}
+function process_operator_click(the_button){
+    var val = $(the_button).text();
+    operator = val;
+    index++;
+    $('.display').html(val);
+}
+function process_equals_click(the_button){
+    var val = $(the_button).text();
+    var answer = 0;
+    switch (operator) {
+        case '+':
+            answer = parseFloat(num_array[0]) + parseFloat(num_array[1]);
+            break;
+        case '-':
+            answer = parseFloat(num_array[0]) - parseFloat(num_array[1]);
+            break;
+        case '÷':
+            answer = parseFloat(num_array[0]) / parseFloat(num_array[1]);
+            break;
+        case 'x':
+            answer = parseFloat(num_array[0]) * parseFloat(num_array[1]);
+            break;
+        default:
+            break;
+    }
+    $('.display').html(answer);
+    console.log('the answer is: ' + answer);
+}
+function process_allclear_click(the_button){
+    var val = $(the_button).text();
+    num_array = [' ', ' '];
+    operator = ' ';
+    index = 0;
+    $('.display').html(" ");
+    console.log(num_array, operator);
+}
+function process_clear_click(the_button){
+    var val = $(the_button).text();
+    $(num_array[index]).val(" ");
+    $('.display').html(" ");
+    console.log('clear');
+}
 // //click handler for buttons
 // $('button').on('click', function() {
 //     var val = $(this).text();
