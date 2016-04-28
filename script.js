@@ -12,8 +12,17 @@ $(document).ready(function() {
 
     // i can click zero numerous times. figure out a way to prevent 0 from logging more than once if value is 0.
 
-    //click handler for buttons
-
+    // //click handler for buttons
+    // $('button.numbers').click(function(){
+    //     process_number_click(this);
+    // });
+    //
+    // function process_number_click(the_button){
+    //     var val = $(the_button).text();
+    //     num_array[index] += val;
+    //     $('.display').html(num_array[index]);
+    //     console.log(num_array);
+    // }
     $('button').on('click', function() {
         var val = $(this).text();
         console.log("btn click: ", val);
