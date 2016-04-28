@@ -9,6 +9,8 @@ var index = 0;
 $(document).ready(function() {
     //set initial display to '0'
     $('.display').html("0")
+
+
     // i can click zero numerous times. figure out a way to prevent 0 from logging more than once if value is 0.
 
     //click handler for buttons
@@ -33,8 +35,7 @@ $(document).ready(function() {
             $('.display').html(val);
         }
 
-
-
+        //equals
         else if ($(this).hasClass('equals')) {
             var answer = 0;
                 switch (operator) {
@@ -46,22 +47,34 @@ $(document).ready(function() {
                         answer = parseFloat(num_array[0]) - parseFloat(num_array[1]);
                         break;
                     case '÷':
+                        //display set to error if you divide by 0.
                         answer = parseFloat(num_array[0]) / parseFloat(num_array[1]);
                         break;
                     case 'x':
                         answer = parseFloat(num_array[0]) * parseFloat(num_array[1]);
                         break;
                     case '=':
+                        // what happens when you press equals again?
+                        // figure out how to recall operator used from previous
+                        //     switch () {
+                        //
+                        //     }
                         break;
                     default:
+                        // $('.display').html('error');
                         break;
-                } $('.display').html(answer);
+                }
+            $('.display').html(answer);
         }
         //all clear 
         else if ($(this).hasClass('all-clear')) {
-
+            function allClear(num_array,operator) {
+                num_array = [' ', ' '];
+                operator = ' ';
+                $('.display').html("0");
+            } allClear();
         }
-        /clear
+        //clear content in current array
         else if ($(this).hasClass('clear')) {
 
         }
