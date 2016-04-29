@@ -2,108 +2,81 @@
 
 
 /*----------------------  GLOBAL VARIABLES ----------------------*/
-var num_array = [' ', ' '];
-var operator = ' ';
-var num_array2 = [' ', ' '];
-var operator2 = ' ';
+var num_array = [''];
+var operator = '';
 var index = 0;
 
 
 /*--------------------------  FUNCTIONS --------------------------*/
-function process_number_click(the_button){
+function process_number_click(the_button) {
     var val = $(the_button).text();
     num_array[index] += val;
     $('.display').html(num_array[index]);
     console.log(num_array);
-    //TODO: figure out how to check if operator has value inside
-    // if (num_array.length ==2 || operator ) {
-    //     num_array2[index] += val;
-    //     $('.display').html(num_array[index]);
-    //     console.log(num_array2);
-    // } else if (num_array2.length == 2) {
-    //     num_array = [];
-    // }
 }
 
 function process_decimal_click(the_button){
     var val = $(the_button).text();
     num_array[index] += val;
     $('.display').html(num_array[index]);
-
 }
 
 function process_operator_click(the_button) {
+    //check if there is a value in index[1] of num_array. if there is one, and the user
+    //types in an additional variable, the below if statement will run the calculation
+    //function and return the calculated value to the index[0].
+    if (typeof num_array[1] == 'string') {
+        evaluate_array();
+    }
     var val = $(the_button).text();
     operator = val;
     $('.display').html(val);
+    index++;
+    num_array[index] = '';
+}
 
-    //increase index of num_array by 1 if the index[1] is empty.
-    if (num_array[1] == ' ') {
-        index++;
+function evaluate_array() {
+    var result=null;
+    if (operator == "+") {
+        result = parseFloat(num_array[0]) + parseFloat(num_array[1]);
+    } else if (operator == "-") {
+        result = parseFloat(num_array[0]) - parseFloat(num_array[1]);
+    } else if (operator == "x") {
+        result =  parseFloat(num_array[0]) * parseFloat(num_array[1]);
+    } else if (operator == '÷') {
+        result =  parseFloat(num_array[0]) / parseFloat(num_array[1]);
     }
-    // function evaluate_current_array() {
-    //     var answer = 0;
-    //     if (operator == "+") {
-    //         answer = parseFloat(num_array[0]) + parseFloat(num_array[1]);
-    //     } else if (operator == "-") {
-    //         answer = parseFloat(num_array[0]) - parseFloat(num_array[1]);
-    //     } else if (operator == "x") {
-    //         answer = parseFloat(num_array[0]) * parseFloat(num_array[1]);
-    //     } else if (operator == '÷') {
-    //         answer = parseFloat(num_array[0]) / parseFloat(num_array[1]);
-    //     }
-    // }
-    else if  (operator != ' ' && num_array[1] != ' ') {
-        var val = $(the_button).text();
-        operator = ' ';
-        operator2 = val;
-        var answer = 0;
-
-
-            evaluate_current_array();
-            console.log('result of evaluate_current_array is ' + evaluate_current_array());
-            num_array2.push(answer);
-            console.log(num_array2);
-        }
-
+    num_array=[result];
+    index=0;
+    operator = '';
+    return result;
 }
 
 function process_equals_click(the_button){
     var val = $(the_button).text();
     var answer = 0;
-    switch (operator) {
-        case '+':
-            answer = parseFloat(num_array[0]) + parseFloat(num_array[1]);
-            break;
-        case '-':
-            answer = parseFloat(num_array[0]) - parseFloat(num_array[1]);
-            break;
-        case '÷':
-            answer = parseFloat(num_array[0]) / parseFloat(num_array[1]);
-            break;
-        case 'x':
-            answer = parseFloat(num_array[0]) * parseFloat(num_array[1]);
-            break;
-        default:
-    }
+    answer = evaluate_array();
     $('.display').html(answer);
     console.log('the answer is: ' + answer);
+    // write a function below that recalls/repeats the same operator and applies it again
+    // if () {
+    // }
 }
 
-function process_allclear_click(the_button){
-    var val = $(the_button).text();
-    num_array = [' ', ' '];
-    operator = ' ';
-    index = 0;
-    $('.display').html(" ");
-    console.log(num_array, operator);
-}
-
-function process_clear_click(the_button){
+function process_clear_entry_click(the_button){
     var val = $(the_button).text();
     $(num_array[index]).val(" ");
     $('.display').html(" ");
     console.log('clear');
+}
+
+function process_clear_click(the_button){
+    var val = $(the_button).text();
+    num_array = [''];
+    operator = '';
+    index = 0;
+    $('.display').html("");
+    console.log(num_array, operator);
 }
 
 
@@ -130,8 +103,8 @@ $(document).ready(function() {
     });
 
     //click handler for all-clear
-    $('button.all-clear').click(function() {
-        process_allclear_click(this);
+    $('button.clear-entry').click(function() {
+        process_clear_entry_click(this);
     });
 
     //click handler for clear
