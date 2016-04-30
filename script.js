@@ -1,4 +1,10 @@
 // Created by gkwon on 4/25/16.
+/*-------------------- V1.0 --------------------*/
+//add values from buttons clicked into plain object that has the following properties
+//type - equal to one of these types "number", "operator", "equalSign"
+//value - equal to the value of the button
+//add object into a global array variable
+//process calculation based on objects in array
 
 
 /*----------------------  GLOBAL VARIABLES ----------------------*/
@@ -19,6 +25,12 @@ function process_decimal_click(the_button){
     var val = $(the_button).text();
     num_array[index] += val;
     $('.display').html(num_array[index]);
+    //TODO: If the user presses multiple decimal,
+        //TODO: Only factor in one decimal.
+    // for (var i=0; i=num_array[index].length; i++) {
+    //
+    // }
+
 }
 
 function process_operator_click(the_button) {
@@ -28,11 +40,27 @@ function process_operator_click(the_button) {
     if (typeof num_array[1] == 'string') {
         evaluate_array();
     }
+    // TODO: If the user presses multiple operators,
+        //TODO: Only factor in the last one they entered.
     var val = $(the_button).text();
     operator = val;
     $('.display').html(val);
     index++;
     num_array[index] = '';
+}
+
+function process_equals_click(the_button){
+    var val = $(the_button).text();
+    var answer = 0;
+    console.log('equal sign has been pressed and the answer is ' + answer);
+    answer = evaluate_array();
+    $('.display').html(answer);
+    // TODO: If the user presses equal again
+        // TODO: Recall what operator was used and recall calculation
+       //TODO: remember index[1] , remember the total, and remember operator
+       //call calculation function
+       // evaluate_array();
+
 }
 
 function evaluate_array() {
@@ -44,30 +72,23 @@ function evaluate_array() {
     } else if (operator == "x") {
         result =  parseFloat(num_array[0]) * parseFloat(num_array[1]);
     } else if (operator == '÷') {
-        result =  parseFloat(num_array[0]) / parseFloat(num_array[1]);
+        if (num_array[1] == "0") {
+            $('.display').html('Error');
+            return;
+        } else {
+            result = parseFloat(num_array[0]) / parseFloat(num_array[1]);
+        }
     }
     num_array=[result];
     index=0;
-    operator = '';
     return result;
-}
-
-function process_equals_click(the_button){
-    var val = $(the_button).text();
-    var answer = 0;
-    answer = evaluate_array();
-    $('.display').html(answer);
-    console.log('the answer is: ' + answer);
-    // write a function below that recalls/repeats the same operator and applies it again
-    // if () {
-    // }
 }
 
 function process_clear_entry_click(the_button){
     var val = $(the_button).text();
-    $(num_array[index]).val(" ");
+    num_array[index] = '';
     $('.display').html(" ");
-    console.log('clear');
+    console.log(num_array, operator);
 }
 
 function process_clear_click(the_button){
@@ -78,7 +99,6 @@ function process_clear_click(the_button){
     $('.display').html("");
     console.log(num_array, operator);
 }
-
 
 /*--------------------- CLICK HANDLERS -----------------------*/
 $(document).ready(function() {
@@ -111,14 +131,5 @@ $(document).ready(function() {
     $('button.clear').click(function() {
         process_clear_click(this);
     });
-
-
 });
 
-
-/*-------------------- V1.0 --------------------*/
-//add values from buttons clicked into plain object that has the following properties
-    //type - equal to one of these types "number", "operator", "equalSign"
-    //value - equal to the value of the button
-//add object into a global array variable
-//process calculation based on objects in array
