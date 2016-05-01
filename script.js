@@ -1,11 +1,4 @@
 // Created by gkwon on 4/25/16.
-/*-------------------- V1.0 --------------------*/
-//add values from buttons clicked into plain object that has the following properties
-//type - equal to one of these types "number", "operator", "equalSign"
-//value - equal to the value of the button
-//add object into a global array variable
-//process calculation based on objects in array
-
 
 /*----------------------  GLOBAL VARIABLES ----------------------*/
 var num_array = [''];
@@ -52,14 +45,15 @@ function process_operator_click(the_button) {
 function process_equals_click(the_button){
     var val = $(the_button).text();
     var answer = 0;
-    console.log('equal sign has been pressed and the answer is ' + answer);
     answer = evaluate_array();
+    console.log('Equal sign has been pressed and the answer is ' + answer);
     $('.display').html(answer);
     // TODO: If the user presses equal again
         // TODO: Recall what operator was used and recall calculation
-       //TODO: remember index[1] , remember the total, and remember operator
-       //call calculation function
-       // evaluate_array();
+       //  TODO: remember index[1] , remember the total, and remember operator
+    // if () {
+    //     evaluate_array();
+    // }
 
 }
 
