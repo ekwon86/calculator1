@@ -19,10 +19,9 @@ function process_decimal_click(the_button){
     num_array[index] += val;
     $('.display').html(num_array[index]);
     //TODO: If the user presses multiple decimal,
-    //TODO: Only factor in one decimal.
+        //TODO: Only factor in one decimal.
     // for (var i=0; i=num_array[index].length; i++) {
-    //
-    // }
+    
 
 }
 
