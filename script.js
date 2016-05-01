@@ -53,7 +53,7 @@ function process_equals_click(the_button){
     // if () {
     //     evaluate_array();
     // }
-
+    
 }
 
 function evaluate_array() {
