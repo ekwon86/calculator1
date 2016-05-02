@@ -45,16 +45,19 @@ function process_equals_click(the_button){
     var val = $(the_button).text();
     var answer = 0;
 
+    //multiple operators
     if (typeof num_array[1] == 'undefined') {
         num_array.push(temp_num);
         evaluate_array();
         $('.display').html(num_array[0]);
         console.log('the new answer is ' + num_array[0]);
-    } else if (typeof num_array[1] == 'undefined' && typeof operator == 'string') {
-        num_array.push(num_array[1]);
+    //operation rollover
+    } else if (typeof num_array[1] == 'string' && typeof operator == 'string') {
+        num_array.splice(1, 0, num_array[0]);
         evaluate_array();
         $('.display').html(num_array[0]);
     }
+    //equals
     else {
         answer = evaluate_array();
         $('.display').html(answer);
