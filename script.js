@@ -21,9 +21,6 @@ function process_decimal_click(the_button){
     $('.display').html(num_array[index]);
     //TODO: If the user presses multiple decimal,
         //TODO: Only factor in one decimal.
-    for (num_array[index]=0; num_array[index] <= num_array[index].length-1; num_array[index]++) {
-
-    }
 }
 
 function process_operator_click(the_button) {
@@ -31,6 +28,7 @@ function process_operator_click(the_button) {
     operator = val;
     $('.display').html(val);
 
+    //multiple operators
     if (typeof num_array[1] == 'string') {
         evaluate_array();
     }
@@ -45,19 +43,20 @@ function process_equals_click(the_button){
     var val = $(the_button).text();
     var answer = 0;
 
-    //multiple operators
+
     if (typeof num_array[1] == 'undefined') {
         num_array.push(temp_num);
         evaluate_array();
         $('.display').html(num_array[0]);
         console.log('the new answer is ' + num_array[0]);
-    //operation rollover
-    } else if (typeof num_array[1] == 'string' && typeof operator == 'string') {
-        num_array.splice(1, 0, num_array[0]);
-        evaluate_array();
-        $('.display').html(num_array[0]);
     }
-    //equals
+    //operation rollover
+    // else if (typeof num_array[1] == 'number' && typeof operator == 'string') {
+    //     num_array.splice(1, 0, num_array[0]);
+    //     evaluate_array();
+    //     $('.display').html(num_array[0]);
+    // }
+    // equals
     else {
         answer = evaluate_array();
         $('.display').html(answer);
@@ -67,7 +66,7 @@ function process_equals_click(the_button){
 }
 
 function evaluate_array() {
-    var result=null;
+    var result= null;
     if (operator == "+") {
         result = parseFloat(num_array[0]) + parseFloat(num_array[1]);
     } else if (operator == "-") {
@@ -104,6 +103,11 @@ function process_clear_click(the_button){
     console.log(num_array, operator);
 }
 
+// function process_delete_click(the_button){
+//     var val = $(the_button).text();
+//     num_array[index] -= val;
+// }
+
 /*--------------------- CLICK HANDLERS -----------------------*/
 $(document).ready(function() {
     //click handler for numbers
@@ -135,5 +139,10 @@ $(document).ready(function() {
     $('button.clear').click(function() {
         process_clear_click(this);
     });
+
+    // //click handler for backspace
+    // $('button.delete').click(function() {
+    //     process_delete_click(this);
+    // });
 });
 
