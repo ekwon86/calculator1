@@ -44,19 +44,24 @@ function process_equals_click(the_button){
     var answer = 0;
 
 
-    if (typeof num_array[1] == 'undefined') {
+    if (num_array[0] === '') {
+        $('.display').html('Ready');
+    }
+    else if (num_array[1] === undefined) {
+        $('.display').html(num_array[0]);
+    }
+    else if (typeof num_array[1] == 'undefined') {
         num_array.push(temp_num);
         evaluate_array();
         $('.display').html(num_array[0]);
         console.log('the new answer is ' + num_array[0]);
     }
     //operation rollover
-    // else if (typeof num_array[1] == 'number' && typeof operator == 'string') {
-    //     num_array.splice(1, 0, num_array[0]);
-    //     evaluate_array();
-    //     $('.display').html(num_array[0]);
-    // }
-    // equals
+    else if (num_array[1] === "" && typeof operator == 'string') {
+        num_array.splice(1, 0, num_array[0]);
+        evaluate_array();
+        $('.display').html(num_array[0]);
+    }
     else {
         answer = evaluate_array();
         $('.display').html(answer);
@@ -103,10 +108,6 @@ function process_clear_click(the_button){
     console.log(num_array, operator);
 }
 
-// function process_delete_click(the_button){
-//     var val = $(the_button).text();
-//     num_array[index] -= val;
-// }
 
 /*--------------------- CLICK HANDLERS -----------------------*/
 $(document).ready(function() {
@@ -140,9 +141,5 @@ $(document).ready(function() {
         process_clear_click(this);
     });
 
-    // //click handler for backspace
-    // $('button.delete').click(function() {
-    //     process_delete_click(this);
-    // });
 });
 
