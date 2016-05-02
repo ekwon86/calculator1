@@ -45,7 +45,8 @@ function process_equals_click(the_button){
     var val = $(the_button).text();
     var answer = 0;
 
-    if (num_array[1] === undefined) {
+    //operation repeat
+    if (typeof num_array[1] == 'undefined' && operator == "") {
         $('.display').html(num_array[0]);
     }
     else if (typeof num_array[1] == 'undefined') {
