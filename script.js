@@ -4,7 +4,7 @@
 var num_array = [''];
 var operator = [''];
 var index = 0;
-var temp_number = null;
+var temp_num = null;
 
 
 /*--------------------------  FUNCTIONS --------------------------*/
@@ -28,8 +28,6 @@ function process_operator_click(the_button) {
     if (typeof num_array[1] == 'string') {
         evaluate_array();
     }
-
-
     // TODO: If the user presses multiple operators,
     //TODO: Only factor in the last one they entered.
     var val = $(the_button).text();
@@ -42,17 +40,17 @@ function process_operator_click(the_button) {
 function process_equals_click(the_button){
     var val = $(the_button).text();
     var answer = 0;
-    answer = evaluate_array();
 
-    console.log('Equal sign has been pressed and the answer is ' + answer);
-    $('.display').html(answer);
-
-
-
-    // TODO: If the user presses equal again
-    // TODO: Recall what operator was used and recall calculation
-    // TODO: remember index[1] , remember the total, and remember operator
-
+    if (typeof num_array[1] == 'undefined') {
+        num_array.push(temp_num);
+        evaluate_array();
+        $('.display').html(num_array[0]);
+    } else {
+        answer = evaluate_array();
+        $('.display').html(answer);
+        console.log('Equal sign has been pressed and the answer is ' + answer);
+        console.log('num_array is currently ' + num_array);
+    }
 }
 
 function evaluate_array() {
@@ -71,7 +69,7 @@ function evaluate_array() {
             result = parseFloat(num_array[0]) / parseFloat(num_array[1]);
         }
     }
-
+    temp_num = num_array[1];
     num_array=[result];
     index=0;
     return result;
