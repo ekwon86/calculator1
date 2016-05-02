@@ -2,8 +2,9 @@
 
 /*----------------------  GLOBAL VARIABLES ----------------------*/
 var num_array = [''];
-var operator = '';
+var operator = [''];
 var index = 0;
+var temp_number = null;
 
 
 /*--------------------------  FUNCTIONS --------------------------*/
@@ -20,18 +21,15 @@ function process_decimal_click(the_button){
     $('.display').html(num_array[index]);
     //TODO: If the user presses multiple decimal,
         //TODO: Only factor in one decimal.
-    // for (var i=0; i=num_array[index].length; i++) {
-    
 
 }
 
 function process_operator_click(the_button) {
-    //check if there is a value in index[1] of num_array. if there is one, and the user
-    //types in an additional variable, the below if statement will run the calculation
-    //function and return the calculated value to the index[0].
     if (typeof num_array[1] == 'string') {
         evaluate_array();
     }
+
+
     // TODO: If the user presses multiple operators,
     //TODO: Only factor in the last one they entered.
     var val = $(the_button).text();
@@ -45,15 +43,16 @@ function process_equals_click(the_button){
     var val = $(the_button).text();
     var answer = 0;
     answer = evaluate_array();
+
     console.log('Equal sign has been pressed and the answer is ' + answer);
     $('.display').html(answer);
+
+
+
     // TODO: If the user presses equal again
     // TODO: Recall what operator was used and recall calculation
-    //  TODO: remember index[1] , remember the total, and remember operator
-    // if () {
-    //     evaluate_array();
-    // }
-    
+    // TODO: remember index[1] , remember the total, and remember operator
+
 }
 
 function evaluate_array() {
@@ -72,6 +71,7 @@ function evaluate_array() {
             result = parseFloat(num_array[0]) / parseFloat(num_array[1]);
         }
     }
+
     num_array=[result];
     index=0;
     return result;
@@ -80,14 +80,14 @@ function evaluate_array() {
 function process_clear_entry_click(the_button){
     var val = $(the_button).text();
     num_array[index] = '';
-    $('.display').html(" ");
+    $('.display').html("");
     console.log(num_array, operator);
 }
 
 function process_clear_click(the_button){
     var val = $(the_button).text();
     num_array = [''];
-    operator = '';
+    operator = [''];
     index = 0;
     $('.display').html("");
     console.log(num_array, operator);
