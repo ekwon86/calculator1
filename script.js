@@ -21,20 +21,24 @@ function process_decimal_click(the_button){
     $('.display').html(num_array[index]);
     //TODO: If the user presses multiple decimal,
         //TODO: Only factor in one decimal.
+    for (num_array[index]=0; num_array[index] <= num_array[index].length-1; num_array[index]++) {
 
+    }
 }
 
 function process_operator_click(the_button) {
-    if (typeof num_array[1] == 'string') {
-        evaluate_array();
-    }
-    // TODO: If the user presses multiple operators,
-    //TODO: Only factor in the last one they entered.
     var val = $(the_button).text();
     operator = val;
     $('.display').html(val);
+
+    if (typeof num_array[1] == 'string') {
+        evaluate_array();
+    }
     index++;
     num_array[index] = '';
+
+    // TODO: If the user presses multiple operators,
+    //TODO: Only factor in the last one they entered.
 }
 
 function process_equals_click(the_button){
@@ -45,7 +49,13 @@ function process_equals_click(the_button){
         num_array.push(temp_num);
         evaluate_array();
         $('.display').html(num_array[0]);
-    } else {
+        console.log('the new answer is ' + num_array[0]);
+    } else if (typeof num_array[1] == 'undefined' && typeof operator == 'string') {
+        num_array.push(num_array[1]);
+        evaluate_array();
+        $('.display').html(num_array[0]);
+    }
+    else {
         answer = evaluate_array();
         $('.display').html(answer);
         console.log('Equal sign has been pressed and the answer is ' + answer);
