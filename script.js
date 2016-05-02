@@ -29,14 +29,15 @@ function process_operator_click(the_button) {
     operator = val;
     $('.display').html(val);
 
+    if (num_array[1] === undefined) {
+        index++;
+        num_array[index] = '';
+    }
     //multiple operators
-    if (typeof num_array[1] == 'string') {
+    else if (typeof num_array[1] == 'string') {
         evaluate_array();
     }
-    
-    index++;
-    num_array[index] = '';
-    
+
     // TODO: If the user presses multiple operators,
     //TODO: Only factor in the last one they entered.
 }
