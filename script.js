@@ -19,6 +19,7 @@ function process_decimal_click(the_button){
     var val = $(the_button).text();
     num_array[index] += val;
     $('.display').html(num_array[index]);
+    
     //TODO: If the user presses multiple decimal,
         //TODO: Only factor in one decimal.
 }
@@ -32,9 +33,10 @@ function process_operator_click(the_button) {
     if (typeof num_array[1] == 'string') {
         evaluate_array();
     }
+    
     index++;
     num_array[index] = '';
-
+    
     // TODO: If the user presses multiple operators,
     //TODO: Only factor in the last one they entered.
 }
@@ -43,11 +45,7 @@ function process_equals_click(the_button){
     var val = $(the_button).text();
     var answer = 0;
 
-
-    if (num_array[0] === '') {
-        $('.display').html('Ready');
-    }
-    else if (num_array[1] === undefined) {
+    if (num_array[1] === undefined) {
         $('.display').html(num_array[0]);
     }
     else if (typeof num_array[1] == 'undefined') {
@@ -108,7 +106,6 @@ function process_clear_click(the_button){
     console.log(num_array, operator);
 }
 
-
 /*--------------------- CLICK HANDLERS -----------------------*/
 $(document).ready(function() {
     //click handler for numbers
@@ -140,6 +137,5 @@ $(document).ready(function() {
     $('button.clear').click(function() {
         process_clear_click(this);
     });
-
 });
 
