@@ -76,3 +76,10 @@ button:hover {
 .equals {
     background: rgba(205,38,38,0.5);
 }
+
+
+@media screen and (max-width: 627px) {
+    .display {
+        font-size: 15px;
+    }
+}
