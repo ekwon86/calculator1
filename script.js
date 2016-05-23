@@ -77,15 +77,15 @@ function evaluate_array() {
     return result;
 }
 
-function process_clear_entry_click(the_button){
-    var val = $(the_button).text();
+function process_clear_entry_click(){
+    // var val = $(the_button).text();
     num_array[index] = '';
     $('.display').html(" ");
     console.log(num_array, operator);
 }
 
-function process_clear_click(the_button){
-    var val = $(the_button).text();
+function process_clear_click(){
+
     num_array = [''];
     operator = '';
     index = 0;
@@ -93,12 +93,20 @@ function process_clear_click(the_button){
     console.log(num_array, operator);
 }
 
+
+function button_pressed(the_button) {
+    var val = $(the_button).text();
+
+    if(val.attr('class') == 'clear') {
+        console.log('test');
+    }
+}
+
 /*--------------------- CLICK HANDLERS -----------------------*/
 $(document).ready(function() {
 
     $('.keys').click(button_pressed);
-
-
+    
     // //click handler for numbers
     // $('button.numbers').click(function(){
     //     process_number_click(this);
