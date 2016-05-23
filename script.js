@@ -41,8 +41,7 @@ function process_operator_click(the_button) {
     num_array[index] = '';
 }
 
-function process_equals_click(the_button){
-    var val = $(the_button).text();
+function equals(){
     var answer = 0;
     answer = evaluate_array();
     console.log('Equal sign has been pressed and the answer is ' + answer);
@@ -50,10 +49,6 @@ function process_equals_click(the_button){
     // TODO: If the user presses equal again
         // TODO: Recall what operator was used and recall calculation
        //  TODO: remember index[1] , remember the total, and remember operator
-    // if () {
-    //     evaluate_array();
-    // }
-
 }
 
 function evaluate_array() {
@@ -77,15 +72,13 @@ function evaluate_array() {
     return result;
 }
 
-function process_clear_entry_click(){
-    // var val = $(the_button).text();
+function clear_entry(){
     num_array[index] = '';
     $('.display').html(" ");
     console.log(num_array, operator);
 }
 
-function process_clear_click(){
-
+function clear(){
     num_array = [''];
     operator = '';
     index = 0;
@@ -94,18 +87,24 @@ function process_clear_click(){
 }
 
 
-function button_pressed(the_button) {
-    var val = $(the_button).text();
+var calculator = {
+    button_pressed: function() {
+        var val = $(this);
 
-    if(val.attr('class') == 'clear') {
-        console.log('test');
+        if (val.attr('class') == 'topbar keys clear-entry col-xs-6') {
+            clear_entry();
+        }
+        else if (val.attr('class') == 'topbar keys clear col-xs-6') {
+            clear();
+        }
+
     }
-}
+};
 
 /*--------------------- CLICK HANDLERS -----------------------*/
 $(document).ready(function() {
 
-    $('.keys').click(button_pressed);
+    $('.keys').click(calculator.button_pressed());
     
     // //click handler for numbers
     // $('button.numbers').click(function(){
