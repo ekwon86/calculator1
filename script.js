@@ -5,7 +5,7 @@ var operator = '';
 var index = 0;
 
 
-/*--------------------------  FUNCTIONS --------------------------*/
+/*-------------------------- FUNCTIONS --------------------------*/
 function process_number_click(the_button) {
     var val = $(the_button).text();
     num_array[index] += val;
@@ -95,34 +95,38 @@ function process_clear_click(the_button){
 
 /*--------------------- CLICK HANDLERS -----------------------*/
 $(document).ready(function() {
-    //click handler for numbers
-    $('button.numbers').click(function(){
-        process_number_click(this);
-    });
 
-    // click handler for decimal
-    $('button.decimal').click(function() {
-        process_decimal_click(this);
-    });
+    $('.keys').click(button_pressed);
 
-    //click handler for operators
-    $('button.operators').click(function() {
-        process_operator_click(this);
-    });
 
-    //click handler for equals
-    $('button.equals').click(function() {
-        process_equals_click(this);
-    });
-
-    //click handler for all-clear
-    $('button.clear-entry').click(function() {
-        process_clear_entry_click(this);
-    });
-
-    //click handler for clear
-    $('button.clear').click(function() {
-        process_clear_click(this);
-    });
+    // //click handler for numbers
+    // $('button.numbers').click(function(){
+    //     process_number_click(this);
+    // });
+    //
+    // // click handler for decimal
+    // $('button.decimal').click(function() {
+    //     process_decimal_click(this);
+    // });
+    //
+    // //click handler for operators
+    // $('button.operators').click(function() {
+    //     process_operator_click(this);
+    // });
+    //
+    // //click handler for equals
+    // $('button.equals').click(function() {
+    //     process_equals_click(this);
+    // });
+    //
+    // //click handler for all-clear
+    // $('button.clear-entry').click(function() {
+    //     process_clear_entry_click(this);
+    // });
+    //
+    // //click handler for clear
+    // $('button.clear').click(function() {
+    //     process_clear_click(this);
+    // });
 });
 
