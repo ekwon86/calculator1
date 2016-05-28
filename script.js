@@ -1,139 +1,136 @@
+// /*-------------------------- FUNCTIONS --------------------------*/
+// function number_click(the_button) {
+//     var val = $(the_button).text();
+//     num_array[index] += val;
+//     $('.display').html(num_array[index]);
+//     console.log(num_array);
+// }
+//
+// function process_decimal_click(the_button){
+//     var val = $(the_button).text();
+//     num_array[index] += val;
+//     $('.display').html(num_array[index]);
+//     //TODO: If the user presses multiple decimal,
+//         //TODO: Only factor in one decimal.
+//     // for (var i=0; i=num_array[index].length; i++) {
+//     //
+//     // }
+//
+// }
+//
 
-/*----------------------  GLOBAL VARIABLES ----------------------*/
-var num_array = [''];
-var operator = '';
-var index = 0;
+//
+// function equals(){
+//     var answer = 0;
+//     answer = evaluate_array();
+//     console.log('Equal sign has been pressed and the answer is ' + answer);
+//     $('.display').html(answer);
+//     // TODO: If the user presses equal again
+//         // TODO: Recall what operator was used and recall calculation
+//        //  TODO: remember index[1] , remember the total, and remember operator
+// }
+//
+// function evaluate_array() {
+//     var result=null;
+//     if (operator == "+") {
+//         result = parseFloat(num_array[0]) + parseFloat(num_array[1]);
+//     } else if (operator == "-") {
+//         result = parseFloat(num_array[0]) - parseFloat(num_array[1]);
+//     } else if (operator == "x") {
+//         result =  parseFloat(num_array[0]) * parseFloat(num_array[1]);
+//     } else if (operator == '÷') {
+//         if (num_array[1] == "0") {
+//             $('.display').html('Error');
+//             return;
+//         } else {
+//             result = parseFloat(num_array[0]) / parseFloat(num_array[1]);
+//         }
+//     }
+//     num_array=[result];
+//     index=0;
+//     return result;
+// }
+//
 
 
-/*-------------------------- FUNCTIONS --------------------------*/
-function process_number_click(the_button) {
-    var val = $(the_button).text();
-    num_array[index] += val;
-    $('.display').html(num_array[index]);
-    console.log(num_array);
-}
 
-function process_decimal_click(the_button){
-    var val = $(the_button).text();
-    num_array[index] += val;
-    $('.display').html(num_array[index]);
-    //TODO: If the user presses multiple decimal,
-        //TODO: Only factor in one decimal.
-    // for (var i=0; i=num_array[index].length; i++) {
-    //
-    // }
 
-}
 
-function process_operator_click(the_button) {
-    //check if there is a value in index[1] of num_array. if there is one, and the user
-    //types in an additional variable, the below if statement will run the calculation
-    //function and return the calculated value to the index[0].
-    if (typeof num_array[1] == 'string') {
-        evaluate_array();
-    }
-    // TODO: If the user presses multiple operators,
-        //TODO: Only factor in the last one they entered.
-    var val = $(the_button).text();
-    operator = val;
-    $('.display').html(val);
-    index++;
-    num_array[index] = '';
-}
+function calc_constructor() {
+    var num_array = [''];
+    var operator = '';
+    var index = 0;
 
-function equals(){
-    var answer = 0;
-    answer = evaluate_array();
-    console.log('Equal sign has been pressed and the answer is ' + answer);
-    $('.display').html(answer);
-    // TODO: If the user presses equal again
-        // TODO: Recall what operator was used and recall calculation
-       //  TODO: remember index[1] , remember the total, and remember operator
-}
-
-function evaluate_array() {
-    var result=null;
-    if (operator == "+") {
-        result = parseFloat(num_array[0]) + parseFloat(num_array[1]);
-    } else if (operator == "-") {
-        result = parseFloat(num_array[0]) - parseFloat(num_array[1]);
-    } else if (operator == "x") {
-        result =  parseFloat(num_array[0]) * parseFloat(num_array[1]);
-    } else if (operator == '÷') {
-        if (num_array[1] == "0") {
-            $('.display').html('Error');
-            return;
-        } else {
-            result = parseFloat(num_array[0]) / parseFloat(num_array[1]);
+    this.button_pressed = function (val) {
+        switch (val) {
+            case '+':
+            case '-':
+            case 'x':
+            case '÷':
+                operator_clicked(val);
+                break;
+            case '.':
+                decimal_clicked(val);
+                break;
+            case '=':
+                evaluate_array();
+                break;
+            case 'CE':
+                clear_entry();
+                break;
+            case 'C':
+                clear();
+                break;
+            //NUMBER CLICKED
+            default:
+                break;
         }
+    };
+
+
+    function operator_clicked(val) {
+        console.log('An operator has been clicked' + val);
+        if (typeof num_array[1] == 'string') {
+            evaluate_array();
+        }
+        $('.display').html(val);
+        this.index++;
+        this.num_array[this.index] = ''
     }
-    num_array=[result];
-    index=0;
-    return result;
-}
 
-function clear_entry(){
-    num_array[index] = '';
-    $('.display').html(" ");
-    console.log(num_array, operator);
-}
-
-function clear(){
-    num_array = [''];
-    operator = '';
-    index = 0;
-    $('.display').html("");
-    console.log(num_array, operator);
-}
-
-
-var calculator = {
-    button_pressed: function() {
-        var val = $(this);
-
-        if (val.attr('class') == 'topbar keys clear-entry col-xs-6') {
-            clear_entry();
-        }
-        else if (val.attr('class') == 'topbar keys clear col-xs-6') {
-            clear();
-        }
+    function evaluate_array() {
 
     }
-};
+
+    function decimal_clicked(){
+
+    }
+
+    function clear_entry(val){
+        console.log('Clear entry has been clicked' + val);
+        this.num_array[this.index] = '';
+        $('.display').html(" ");
+        console.log(this.num_array, this.operator);
+    }
+
+    function clear(val){
+        console.log('Clear has been clicked' + val);
+        this.num_array = [''];
+        this.operator = '';
+        this.index = 0;
+        $('.display').html("");
+        console.log(this.num_array, this.operator);
+    }
+}
+
 
 /*--------------------- CLICK HANDLERS -----------------------*/
 $(document).ready(function() {
+    //New calculator instantiation
+    var calc = new calc_constructor();
 
-    $('.keys').click(calculator.button_pressed());
-    
-    // //click handler for numbers
-    // $('button.numbers').click(function(){
-    //     process_number_click(this);
-    // });
-    //
-    // // click handler for decimal
-    // $('button.decimal').click(function() {
-    //     process_decimal_click(this);
-    // });
-    //
-    // //click handler for operators
-    // $('button.operators').click(function() {
-    //     process_operator_click(this);
-    // });
-    //
-    // //click handler for equals
-    // $('button.equals').click(function() {
-    //     process_equals_click(this);
-    // });
-    //
-    // //click handler for all-clear
-    // $('button.clear-entry').click(function() {
-    //     process_clear_entry_click(this);
-    // });
-    //
-    // //click handler for clear
-    // $('button.clear').click(function() {
-    //     process_clear_click(this);
-    // });
+    $('button').click(function() {
+        calc.button_pressed($(this).text());
+    })
 });
 
