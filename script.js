@@ -1,11 +1,4 @@
-// /*-------------------------- FUNCTIONS --------------------------*/
-// function number_click(the_button) {
-//     var val = $(the_button).text();
-//     num_array[index] += val;
-//     $('.display').html(num_array[index]);
-//     console.log(num_array);
-// }
-//
+
 // function process_decimal_click(the_button){
 //     var val = $(the_button).text();
 //     num_array[index] += val;
@@ -61,16 +54,17 @@ function calc_constructor() {
     var operator = '';
     var index = 0;
 
+    /********************** BUTTON PRESSED **********************/
     this.button_pressed = function (val) {
         switch (val) {
             case '+':
             case '-':
             case 'x':
             case '÷':
-                operator_clicked(val);
+                operator_clicked();
                 break;
             case '.':
-                decimal_clicked(val);
+                decimal_clicked();
                 break;
             case '=':
                 evaluate_array();
@@ -83,11 +77,24 @@ function calc_constructor() {
                 break;
             //NUMBER CLICKED
             default:
+                number_clicked();
                 break;
         }
     };
 
+    /********************** NUMBER CLICKED **********************/    
+    function number_clicked(val){
+        num_array[index] += val;
+        $('.display').html(num_array[index]);
+        console.log(num_array);
+    }
+    
+    /********************** DECIMAL CLICKED **********************/
+    function decimal_clicked(val){
 
+    }
+    
+    /********************** OPERATOR CLICKED **********************/
     function operator_clicked(val) {
         console.log('An operator has been clicked' + val);
         if (typeof num_array[1] == 'string') {
@@ -97,22 +104,21 @@ function calc_constructor() {
         this.index++;
         this.num_array[this.index] = ''
     }
-
+    
+    /********************** CALCULATE **********************/
     function evaluate_array() {
 
     }
-
-    function decimal_clicked(){
-
-    }
-
+    
+    /********************** CLEAR ENTRY **********************/
     function clear_entry(val){
         console.log('Clear entry has been clicked' + val);
         this.num_array[this.index] = '';
         $('.display').html(" ");
         console.log(this.num_array, this.operator);
     }
-
+    
+    /********************** CLEAR ALL **********************/
     function clear(val){
         console.log('Clear has been clicked' + val);
         this.num_array = [''];
