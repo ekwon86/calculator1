@@ -5,13 +5,8 @@
 //     $('.display').html(num_array[index]);
 //     //TODO: If the user presses multiple decimal,
 //         //TODO: Only factor in one decimal.
-//     // for (var i=0; i=num_array[index].length; i++) {
-//     //
-//     // }
-//
-// }
-//
 
+// }
 //
 // function equals(){
 //     var answer = 0;
@@ -23,97 +18,98 @@
 //        //  TODO: remember index[1] , remember the total, and remember operator
 // }
 //
-// function evaluate_array() {
-//     var result=null;
-//     if (operator == "+") {
-//         result = parseFloat(num_array[0]) + parseFloat(num_array[1]);
-//     } else if (operator == "-") {
-//         result = parseFloat(num_array[0]) - parseFloat(num_array[1]);
-//     } else if (operator == "x") {
-//         result =  parseFloat(num_array[0]) * parseFloat(num_array[1]);
-//     } else if (operator == '÷') {
-//         if (num_array[1] == "0") {
-//             $('.display').html('Error');
-//             return;
-//         } else {
-//             result = parseFloat(num_array[0]) / parseFloat(num_array[1]);
-//         }
-//     }
-//     num_array=[result];
-//     index=0;
-//     return result;
-// }
-//
-
-
 
 
 
 function calc_constructor() {
-    var num_array = [""];
-    var operator = '';
-    var index = 0;
+    var self = this;
+    self.num_array = [""];
+    self.operator = '';
+    self.index = 0;
+    self.result = null;
 
     /********************** BUTTON PRESSED **********************/
-    this.button_pressed = function (val) {
+    self.button_pressed = function (val) {
         switch (val) {
             case '+':
             case '-':
             case 'x':
             case '÷':
-                operator_clicked();
+                self.operator_clicked(val);
                 break;
             case '.':
-                decimal_clicked();
+                self.decimal_clicked(val);
                 break;
             case '=':
-                evaluate_array();
+                self.evaluate_array();
                 break;
             case 'CE':
-                clear_entry();
+                self.clear_entry(val);
                 break;
             case 'C':
-                clear();
+                self.clear(val);
                 break;
-            //NUMBER CLICKED
             default:
-                number_clicked();
+                self.number_clicked(val);
                 break;
         }
     };
 
-    /************************ DISPLAY  *************************/
-    function display(val){
+    /************************ DISPLAY *************************/
+    self.display = function(val){
         $('.display').html(val);
-    }
+    };
     /********************** NUMBER CLICKED **********************/    
-    function number_clicked(num){
-        num_array[index] += num;
-        console.log(num_array);
-        display(num);
-    }
+    self.number_clicked = function(num) {
+        console.log('number has been clicked',num);
+        self.num_array[self.index] += num;
+        console.log(self.num_array);
+        self.display(num);
+    };
     
     /********************** DECIMAL CLICKED **********************/
-    function decimal_clicked(val){
+    self.decimal_clicked = function(val){
+        console.log('decimal has been clicked',val);
+        self.display(val);
+    };
 
-    }
-    
     /********************** OPERATOR CLICKED **********************/
-    function operator_clicked(val) {
-        console.log('An operator has been clicked ' + val);
-        if (typeof num_array[1] == 'string') {
-            evaluate_array();
-        } 
-        $('.display').html(val);
-        index++;
-        num_array[index] = ''
-    }
+    self.operator_clicked = function(val){
+        console.log('operator has been clicked',val);
+        if (typeof self.num_array[1] == 'string'){
+            self.evaluate_array();
+        }
+        self.index++;
+        self.num_array[self.index] = '';
+        self.display(val);
+    };
     
     /********************** CALCULATE **********************/
-    function evaluate_array() {
+    self.evaluate_array = function() {
+        console.log('equals has been pressed');
+        if (self.operator == "+"){
+            self.result = parseFloat(self.num_array[0]) + parseFloat(self.num_array[1]);
+        }
+        else if (self.operator == "-"){
+            self.result = parseFloat(self.num_array[0]) - parseFloat(self.num_array[1]);
+        }
+        else if (self.operator == "x"){
+            self.result = parseFloat(self.num_array[0]) * parseFloat(self.num_array[1]);
+        }
+        else if (self.operator == '÷'){
+            if (self.num_array[1] == "0"){
+                $('.display').html('Error');
+            }
+            else {
+                self.result = parseFloat(self.num_array[0]) / parseFloat(self.num_array[1]);
+            }
+        }
+        self.num_array=[self.result];
+        self.index = 0;
+        self.display();
+        return self.result;
+    };
 
-    }
-    
     /********************** CLEAR ENTRY **********************/
     function clear_entry(val){
         console.log('Clear entry has been clicked' + val);
