@@ -41,7 +41,7 @@ function calc_constructor() {
                 self.decimal_clicked(val);
                 break;
             case '=':
-                self.evaluate_array();
+                self.evaluate_array(val);
                 break;
             case 'CE':
                 self.clear_entry(val);
@@ -64,7 +64,7 @@ function calc_constructor() {
         console.log('number has been clicked',num);
         self.num_array[self.index] += num;
         console.log(self.num_array);
-        self.display(num);
+        self.display(self.num_array[self.index]);
     };
     
     /********************** DECIMAL CLICKED **********************/
@@ -75,7 +75,8 @@ function calc_constructor() {
 
     /********************** OPERATOR CLICKED **********************/
     self.operator_clicked = function(val){
-        console.log('operator has been clicked',val);
+        self.operator = val;
+        console.log('operator has been clicked', self.operator);
         if (typeof self.num_array[1] == 'string'){
             self.evaluate_array();
         }
@@ -86,7 +87,7 @@ function calc_constructor() {
     
     /********************** CALCULATE **********************/
     self.evaluate_array = function() {
-        console.log('equals has been pressed');
+        console.log("num_array is currently", self.num_array, "operator is currently", self.operator);
         if (self.operator == "+"){
             self.result = parseFloat(self.num_array[0]) + parseFloat(self.num_array[1]);
         }
@@ -106,7 +107,7 @@ function calc_constructor() {
         }
         self.num_array=[self.result];
         self.index = 0;
-        self.display();
+        $('.display').html(self.result);
         return self.result;
     };
 
