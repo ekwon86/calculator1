@@ -50,7 +50,7 @@
 
 
 function calc_constructor() {
-    var num_array = [''];
+    var num_array = [""];
     var operator = '';
     var index = 0;
 
@@ -82,11 +82,15 @@ function calc_constructor() {
         }
     };
 
+    /************************ DISPLAY  *************************/
+    function display(val){
+        $('.display').html(val);
+    }
     /********************** NUMBER CLICKED **********************/    
-    function number_clicked(val){
-        num_array[index] += val;
-        $('.display').html(num_array[index]);
+    function number_clicked(num){
+        num_array[index] += num;
         console.log(num_array);
+        display(num);
     }
     
     /********************** DECIMAL CLICKED **********************/
@@ -96,13 +100,13 @@ function calc_constructor() {
     
     /********************** OPERATOR CLICKED **********************/
     function operator_clicked(val) {
-        console.log('An operator has been clicked' + val);
+        console.log('An operator has been clicked ' + val);
         if (typeof num_array[1] == 'string') {
             evaluate_array();
-        }
+        } 
         $('.display').html(val);
-        this.index++;
-        this.num_array[this.index] = ''
+        index++;
+        num_array[index] = ''
     }
     
     /********************** CALCULATE **********************/
@@ -113,19 +117,19 @@ function calc_constructor() {
     /********************** CLEAR ENTRY **********************/
     function clear_entry(val){
         console.log('Clear entry has been clicked' + val);
-        this.num_array[this.index] = '';
+        num_array[index] = '';
         $('.display').html(" ");
-        console.log(this.num_array, this.operator);
+        console.log(num_array, operator);
     }
     
     /********************** CLEAR ALL **********************/
     function clear(val){
         console.log('Clear has been clicked' + val);
-        this.num_array = [''];
-        this.operator = '';
-        this.index = 0;
+        num_array = [''];
+        operator = '';
+        index = 0;
         $('.display').html("");
-        console.log(this.num_array, this.operator);
+        console.log(num_array, operator);
     }
 }
 
