@@ -1,12 +1,12 @@
 # Calculator
-This a calculator that takes in two operands and an operator and performs simple calculations. 
+This a calculator that takes in two operands and an operator and performs calculations. 
 
-##### Technologies Used
-- HTML5
-- CSS
-- Bootstrap
-- Javascript
-- jQuery
+##### Features I have to implement: 
+- [ ] Exponent
+- [ ] Parantheses
+- [ ] Order of Operations
+- [x] Use Object Oriented Javascript 
+
 
 ## [Live Demo](https://ekwon86.github.io/calculator)
 
