@@ -1,5 +1,3 @@
-/** CALCULATOR CONSTRUCTOR**/
-
 function calc_constructor() {
     var self = this;
     self.num_array = [""];
@@ -47,9 +45,11 @@ function calc_constructor() {
     
     /********************** DECIMAL CLICKED **********************/
     self.decimal_clicked = function(val){
+        /** Checks num_array and locates decimal. If decimal present, return **/
         if (self.num_array[self.index].indexOf('.') != '-1'){
             return;
         }
+        /** If user presses decimal first insert 0 before decimal **/
         else if (self.num_array[self.index] === ""){
             self.num_array[self.index] += 0;
         }
@@ -61,9 +61,16 @@ function calc_constructor() {
     self.operator_clicked = function(val){
         self.operator = val;
         console.log('operator clicked:', self.operator);
+        
+        /** If num_array[0]&[1] have values and operator pressed, evaluate array **/
         if (typeof self.num_array[1] == 'string'){
             self.evaluate_array();
         }
+        /** If operator already exists don't increase index **/
+        if (self.operator !== ""){
+            console.log('operator is present')
+        }
+        
         self.index++;
         self.num_array[self.index] = '';
         self.display(val);
@@ -77,7 +84,9 @@ function calc_constructor() {
             return;
         }
         /** If user presses enter after array is evaluated, repeat operation **/
-        
+
+
+
         if (self.operator == "+"){
             self.result = parseFloat(self.num_array[0]) + parseFloat(self.num_array[1]);
         }
@@ -103,7 +112,6 @@ function calc_constructor() {
 
     /********************** CLEAR ENTRY **********************/
     self.clear_entry = function(){
-        console.log('Clear entry has been clicked');
         self.num_array[self.index] = '';
         $('.display').html(" ");
         console.log(self.num_array, self.operator);
@@ -111,7 +119,6 @@ function calc_constructor() {
     
     /********************** CLEAR ALL **********************/
     self.clear = function(){
-        console.log('Clear has been clicked');
         self.num_array = [''];
         self.operator = '';
         self.index = 0;
@@ -120,6 +127,7 @@ function calc_constructor() {
     }
 }
 
+
 /*--------------------- CLICK HANDLERS -----------------------*/
 $(document).ready(function() {
     //New calculator instantiation
@@ -127,6 +135,7 @@ $(document).ready(function() {
 
     $('button').click(function() {
         calc.button_pressed($(this).text());
-    })
+    });
+
 });
 
