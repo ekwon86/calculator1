@@ -71,6 +71,13 @@ function calc_constructor() {
     
     /********************** CALCULATE **********************/
     self.evaluate_array = function() {
+        /** If user presses enter when array is empty, don't evaluate array **/
+        if (self.num_array[0] === "" || self.num_array[1] === "") {
+            console.log('Cannot evaluate.');
+            return;
+        }
+        /** If user presses enter after array is evaluated, repeat operation **/
+        
         if (self.operator == "+"){
             self.result = parseFloat(self.num_array[0]) + parseFloat(self.num_array[1]);
         }
@@ -112,7 +119,6 @@ function calc_constructor() {
         console.log(self.num_array, self.operator);
     }
 }
-
 
 /*--------------------- CLICK HANDLERS -----------------------*/
 $(document).ready(function() {
