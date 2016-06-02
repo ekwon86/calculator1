@@ -6,6 +6,7 @@
     text-align: center;
     box-sizing: border-box;
 }
+
 body {
     background-image: url("images/background.jpg");
     background-size: 100vw 100vh;
@@ -15,42 +16,52 @@ body {
     height: 50vh;
     margin-top: 15vh;
 }
+
 .main-container > *{
     height: 100%;
 }
+
 .top{
     height: 20%;
 }
+
 .bottom{
     height: 80%;
 }
+
 .row_fullheight{
     height: 100%;
 }
+
 .col_fullheight{
     height: 100%;
 }
+
 .display {
     height: 100%;
     background: rgba(192,192,192,0.1);
     box-shadow: 1px 1px 1px 1px #272727;
-    font-size: 150%;
+    font-size: 5vh;
+    text-shadow: 3px 3px 8px black;
     color: white;
     border-radius: 2%;
     text-align: right;
     padding-right: 1vw;
-    font-weight: lighter;
 }
+
 .keys {
     text-align: center;
     padding: 2vh 0 2vh 0;
+    font-size: 3vh;
     box-sizing: border-box;
     background: rgba(105,105,105,0.5);
     color: white;
     border-radius: 2%;
     box-shadow: 1px 1px 1px 1px #272727;
     font-weight: 100;
+    text-shadow: 3px 3px 6px black;
 }
+
 .topbar {
     text-align: center;
     box-sizing: border-box;
@@ -63,25 +74,29 @@ body {
     margin-top: 0.5vh;
     padding: 0.15em;
 }
+
 button:hover {
     background-color: mediumturquoise;
 }
+
 .operators {
     background: rgba(255,153,0,0.5);
 }
+
 .clear-entry {
     background: rgba(255,99,71,0.5);
 }
+
 .clear {
     background: rgba(255,127,0,0.5);
 }
+
 .equals {
     background: rgba(205,38,38,0.5);
 }
 
-
-@media screen and (max-width: 627px) {
-    .display {
-        font-size: 15px;
-    }
-}
+/*@media screen and (max-width: 627px) {*/
+    /*.display {*/
+        /*font-size: 15px;*/
+    /*}*/
+/*}*/
