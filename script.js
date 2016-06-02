@@ -1,17 +1,4 @@
-
-
-// function equals(){
-//     var answer = 0;
-//     answer = evaluate_array();
-//     console.log('Equal sign has been pressed and the answer is ' + answer);
-//     $('.display').html(answer);
-//     // TODO: If the user presses equal again
-//         // TODO: Recall what operator was used and recall calculation
-//        //  TODO: remember index[1] , remember the total, and remember operator
-// }
-//
-
-
+/** CALCULATOR CONSTRUCTOR**/
 
 function calc_constructor() {
     var self = this;
@@ -36,10 +23,10 @@ function calc_constructor() {
                 self.evaluate_array(val);
                 break;
             case 'CE':
-                self.clear_entry(val);
+                self.clear_entry();
                 break;
             case 'C':
-                self.clear(val);
+                self.clear();
                 break;
             default:
                 self.number_clicked(val);
@@ -53,7 +40,6 @@ function calc_constructor() {
     };
     /********************** NUMBER CLICKED **********************/    
     self.number_clicked = function(num) {
-        // console.log('number has been clicked',num);
         self.num_array[self.index] += num;
         console.log('num_array:',self.num_array);
         self.display(self.num_array[self.index]);
@@ -61,15 +47,20 @@ function calc_constructor() {
     
     /********************** DECIMAL CLICKED **********************/
     self.decimal_clicked = function(val){
-        console.log('decimal has been clicked',val);
+        if (self.num_array[self.index].indexOf('.') != '-1'){
+            return;
+        }
+        else if (self.num_array[self.index] === ""){
+            self.num_array[self.index] += 0;
+        }
         self.num_array[self.index] += val;
         self.display(self.num_array[self.index]);
     };
-    
+
     /********************** OPERATOR CLICKED **********************/
     self.operator_clicked = function(val){
         self.operator = val;
-        console.log('operator has been clicked', self.operator);
+        console.log('operator clicked:', self.operator);
         if (typeof self.num_array[1] == 'string'){
             self.evaluate_array();
         }
@@ -80,7 +71,6 @@ function calc_constructor() {
     
     /********************** CALCULATE **********************/
     self.evaluate_array = function() {
-        console.log("num_array is currently", self.num_array, "operator is currently", self.operator);
         if (self.operator == "+"){
             self.result = parseFloat(self.num_array[0]) + parseFloat(self.num_array[1]);
         }
@@ -92,7 +82,7 @@ function calc_constructor() {
         }
         else if (self.operator == '÷'){
             if (self.num_array[1] == "0"){
-                $('.display').html('Error');
+                self.display('Error');
             }
             else {
                 self.result = parseFloat(self.num_array[0]) / parseFloat(self.num_array[1]);
@@ -100,26 +90,26 @@ function calc_constructor() {
         }
         self.num_array=[self.result];
         self.index = 0;
-        $('.display').html(self.result);
+        self.display(self.result);
         return self.result;
     };
 
     /********************** CLEAR ENTRY **********************/
-    function clear_entry(val){
-        console.log('Clear entry has been clicked' + val);
-        num_array[index] = '';
+    self.clear_entry = function(){
+        console.log('Clear entry has been clicked');
+        self.num_array[self.index] = '';
         $('.display').html(" ");
-        console.log(num_array, operator);
-    }
+        console.log(self.num_array, self.operator);
+    };
     
     /********************** CLEAR ALL **********************/
-    function clear(val){
-        console.log('Clear has been clicked' + val);
-        num_array = [''];
-        operator = '';
-        index = 0;
+    self.clear = function(){
+        console.log('Clear has been clicked');
+        self.num_array = [''];
+        self.operator = '';
+        self.index = 0;
         $('.display').html("");
-        console.log(num_array, operator);
+        console.log(self.num_array, self.operator);
     }
 }
 
