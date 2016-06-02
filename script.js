@@ -26,6 +26,10 @@ function calc_constructor() {
             case 'C':
                 self.clear();
                 break;
+            // case 'xy':
+            //     $('.display').html('^');
+            //     self.exponent_clicked(val);
+            //     break;
             default:
                 self.number_clicked(val);
                 break;
@@ -75,6 +79,15 @@ function calc_constructor() {
         self.num_array[self.index] = '';
         self.display(val);
     };
+
+    // /********************** EXPONENT CLICKED **********************/
+    // self.exponent_clicked = function(val){
+    //     self.display(val);
+    //     if (self.num_array[0] === "") {
+    //         console.log('Please enter a number');
+    //         return;
+    //     }
+    // };
     
     /********************** CALCULATE **********************/
     self.evaluate_array = function() {
@@ -127,15 +140,49 @@ function calc_constructor() {
     }
 }
 
+/********************** KEYBOARD PRESS **********************/
+function keyboard_press(keyCode) {
+    var key_chart = {
+        48: 0,
+        49: 1,
+        50: 2,
+        51: 3,
+        52: 4,
+        53: 5,
+        54: 6,
+        55: 7,
+        56: 8,
+        57: 9,
+        46: '.',
+        43: '+',
+        45: '-',
+        42: 'x',
+        47: '÷',
+        13: '=',
+        99: 'C'
+    };
 
-/*--------------------- CLICK HANDLERS -----------------------*/
+    if (key_chart[keyCode] != undefined) {
+        return key_chart[keyCode];
+    }
+    else {
+        return 'Invalid'
+    }
+}
+
 $(document).ready(function() {
-    //New calculator instantiation
+    /** Calculator instantiation **/
     var calc = new calc_constructor();
 
+    /** Click handler **/
     $('button').click(function() {
         calc.button_pressed($(this).text());
     });
 
+    /** Keyboard Input **/
+    $(window).on('keypress', function(e) {
+        calc.button_pressed(keyboard_press(e.keyCode));
+    });
+    
 });
 
