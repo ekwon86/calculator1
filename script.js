@@ -1,13 +1,5 @@
 
-// function process_decimal_click(the_button){
-//     var val = $(the_button).text();
-//     num_array[index] += val;
-//     $('.display').html(num_array[index]);
-//     //TODO: If the user presses multiple decimal,
-//         //TODO: Only factor in one decimal.
 
-// }
-//
 // function equals(){
 //     var answer = 0;
 //     answer = evaluate_array();
@@ -61,18 +53,19 @@ function calc_constructor() {
     };
     /********************** NUMBER CLICKED **********************/    
     self.number_clicked = function(num) {
-        console.log('number has been clicked',num);
+        // console.log('number has been clicked',num);
         self.num_array[self.index] += num;
-        console.log(self.num_array);
+        console.log('num_array:',self.num_array);
         self.display(self.num_array[self.index]);
     };
     
     /********************** DECIMAL CLICKED **********************/
     self.decimal_clicked = function(val){
         console.log('decimal has been clicked',val);
-        self.display(val);
+        self.num_array[self.index] += val;
+        self.display(self.num_array[self.index]);
     };
-
+    
     /********************** OPERATOR CLICKED **********************/
     self.operator_clicked = function(val){
         self.operator = val;
