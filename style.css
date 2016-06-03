@@ -95,8 +95,20 @@ button:hover {
     background: rgba(205,38,38,0.5);
 }
 
+#ghlink {
+    color: white;
+    position: absolute;
+    top: 59vh;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+
+#ghlink:hover{
+    color: #44b5ff;
+}
+
 /*@media screen and (max-width: 627px) {*/
-    /*.display {*/
-        /*font-size: 15px;*/
-    /*}*/
+/*.display {*/
+/*font-size: 15px;*/
+/*}*/
 /*}*/
